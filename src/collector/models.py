@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class PuzzlePiece(models.Model):
 	url = models.URLField(verbose_name="image url")
 	hash = models.CharField(max_length=64, unique=True, default="empty", verbose_name="sha256 hash of the url")
