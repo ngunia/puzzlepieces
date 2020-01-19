@@ -655,7 +655,8 @@ def exportVerifiedCSV(request):
 		"Confidence",
 		"Transcription hash",
 		"Transcription count",
-		"Incorrect Rotation Flag"
+		"Incorrect Rotation Flag",
+		"Time verified"
 	])
 
 	for solution in ConfidentSolution.objects.all():
@@ -680,7 +681,8 @@ def exportVerifiedCSV(request):
 			solution.confidence,
 			solution.datahash,
 			solution.puzzlePiece.transCount,
-			solution.rotated
+			solution.rotated,
+			solution.verified_time
 		])
 
 	return response
