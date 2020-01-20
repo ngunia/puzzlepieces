@@ -761,19 +761,19 @@ def exportTranscriptionsCSV(request):
 
 
 def hash_transcription(center, walls, links):
-	hash_str = serializer.data.center + ' ' + \
-		str(1 if serializer.data.wall1 else 0) + \
-		str(1 if serializer.data.wall2 else 0) + \
-		str(1 if serializer.data.wall3 else 0) + \
-		str(1 if serializer.data.wall4 else 0) + \
-		str(1 if serializer.data.wall5 else 0) + \
-		str(1 if serializer.data.wall6 else 0) + \
+	hash_str = center + ' ' + \
+		str(1 if walls[0] else 0) + \
+		str(1 if walls[1] else 0) + \
+		str(1 if walls[2] else 0) + \
+		str(1 if walls[3] else 0) + \
+		str(1 if walls[4] else 0) + \
+		str(1 if walls[5] else 0) + \
 		' ' + \
-		serializer.data.link1.strip() + ' ' + \
-		serializer.data.link2.strip() + ' ' + \
-		serializer.data.link3.strip() + ' ' + \
-		serializer.data.link4.strip() + ' ' + \
-		serializer.data.link5.strip() + ' ' + \
-		serializer.data.link6.strip()
+		links[0].strip() + ' ' + \
+		links[1].strip() + ' ' + \
+		links[2].strip() + ' ' + \
+		links[3].strip() + ' ' + \
+		links[4].strip() + ' ' + \
+		links[5].strip()
 
 	return hash_my_data(hash_str.upper())
