@@ -627,8 +627,6 @@ class TranscriptionDataViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin)
         else:
             ip = request.META.get('REMOTE_ADDR')
 
-        # TODO: ALSO MAKE HASH
-
         # ip_address in kwargs here *should* put it in?
         serializer.save(ip_address=ip)
 

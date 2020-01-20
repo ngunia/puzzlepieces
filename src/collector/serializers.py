@@ -1,14 +1,36 @@
 from rest_framework import serializers
+import hashlib
 from . import models
 
 class TranscriptionDataSerializer(serializers.ModelSerializer):
+    datahash = serializers.SerializerMethodField('get_data_hash')
+
     class Meta:
         model = models.TranscriptionData
         fields = [
             'puzzlePiece', 'bad_image', 'orientation', 'center',
             'wall1', 'wall2', 'wall3', 'wall4', 'wall5', 'wall6',
             'link1', 'link2', 'link3', 'link4', 'link5', 'link6',
+            'datahash'
         ]
+
+    def get_data_hash(self, transcription):
+        hashStr = transcription.center + ' ' + \
+                  str(1 if transcription.wall1 else 0) + \
+                  str(1 if transcription.wall2 else 0) + \
+                  str(1 if transcription.wall3 else 0) + \
+                  str(1 if transcription.wall4 else 0) + \
+                  str(1 if transcription.wall5 else 0) + \
+                  str(1 if transcription.wall6 else 0) + \
+                  ' ' + \
+                  transcription.link1.strip() + ' ' + \
+                  transcription.link2.strip() + ' ' + \
+                  transcription.link3.strip() + ' ' + \
+                  transcription.link4.strip() + ' ' + \
+                  transcription.link5.strip() + ' ' + \
+                  transcription.link6.strip()
+
+        return hashlib.sha256(hashStr.upper().encode("utf-8")).hexdigest()
 
 
 class PuzzlePieceSerializer(serializers.ModelSerializer):
