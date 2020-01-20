@@ -632,7 +632,7 @@ class TranscriptionDataViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin)
         data_hash = hash_transcription(serializer.data.center, walls, links)
 
         # ip_address in kwargs here *should* put it in?
-        serializer.save(ip_address=ip, datahash=data_hash)
+        serializer.save(ip_address=hash_my_data(ip), datahash=data_hash)
 
         headers = self.get_success_headers(serializer.data)
 
@@ -761,19 +761,19 @@ def exportTranscriptionsCSV(request):
 
 
 def hash_transcription(center, walls, links):
-    hash_str = serializer.data.center + ' ' + \
-        str(1 if serializer.data.wall1 else 0) + \
-        str(1 if serializer.data.wall2 else 0) + \
-        str(1 if serializer.data.wall3 else 0) + \
-        str(1 if serializer.data.wall4 else 0) + \
-        str(1 if serializer.data.wall5 else 0) + \
-        str(1 if serializer.data.wall6 else 0) + \
-        ' ' + \
-        serializer.data.link1.strip() + ' ' + \
-        serializer.data.link2.strip() + ' ' + \
-        serializer.data.link3.strip() + ' ' + \
-        serializer.data.link4.strip() + ' ' + \
-        serializer.data.link5.strip() + ' ' + \
-        serializer.data.link6.strip()
+	hash_str = serializer.data.center + ' ' + \
+		str(1 if serializer.data.wall1 else 0) + \
+		str(1 if serializer.data.wall2 else 0) + \
+		str(1 if serializer.data.wall3 else 0) + \
+		str(1 if serializer.data.wall4 else 0) + \
+		str(1 if serializer.data.wall5 else 0) + \
+		str(1 if serializer.data.wall6 else 0) + \
+		' ' + \
+		serializer.data.link1.strip() + ' ' + \
+		serializer.data.link2.strip() + ' ' + \
+		serializer.data.link3.strip() + ' ' + \
+		serializer.data.link4.strip() + ' ' + \
+		serializer.data.link5.strip() + ' ' + \
+		serializer.data.link6.strip()
 
-    return hash_my_data(hash_str.upper())
+	return hash_my_data(hash_str.upper())
