@@ -336,12 +336,10 @@ def processTransscriptionData(rawData, bad_image, rotated_image, puzzlePiece, cl
 		transcriptData.link5 = linkJoiner.join(edges[4])
 		transcriptData.link6 = linkJoiner.join(edges[5])
 
-		hashStr = center + ' ' + str(1 if walls[0] == True else 0) + str(1 if walls[1] == True else 0) + str(1 if walls[3] == True else 0) + \
-			str(1 if walls[4] == True else 0) + str(1 if walls[4] == True else 0) + str(1 if walls[5] == True else 0) + ' ' + \
-			transcriptData.link1 + ' ' + transcriptData.link2 + ' ' + transcriptData.link3 + ' ' + \
-			transcriptData.link4 + ' ' + transcriptData.link5 + ' ' + transcriptData.link6
+		hash_edges = [transcriptData.link1, transcriptData.link2, transcriptData.link3,
+						transcriptData.link4, transcriptData.link5, transcriptData.link6]
+		transcriptData.datahash = transcriptData.datahash = hash_transcription(center, walls, hash_edges)
 
-		transcriptData.datahash = hash_my_data(hashStr.upper())
 		if rotated_image and bool(rotated_image) == True:                                                                                                                                                                                                                           transcriptData.orientation = "wrong"
 
 		transcriptData.save()
